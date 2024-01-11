@@ -36,9 +36,13 @@ xyz, xy, xz, yz, x, y, z
 
 ## OSC-Router config
 
-The OSC-Router is started by executing the `MAIN_oscrouter.py`. Per default it loads the configurationfile `oscRouterConfig.txt` in the same folder. With the argument `--config` another file can be loaded.
+The OSC-Router is started by executing the `MAIN_oscrouter.py`. Per default it looks for a config file called `oscRouterConfig.yml` in these directories in this order:`$HOME/.config/seamless-core/oscrouter/`, `/etc/seamless-core/oscrouter/`, `/usr/local/etc/seamless-core/oscrouter`. If no config is found the configuration file `oscRouterConfig.yml` in the same folder is loaded. With the argument `--config` another file can be loaded.
 
-The configfile consists of a number of blocks which are divided with `***`. For more information have a look at `configSample.txt`
+The config consists of multiple blocks: 
+- `globalconfig` contains general options concerning the router
+- `audiorouters` and `audioroutersWFS` contain an array of options that define a single audiorouter or wfs-audiorouter respectively
+- `renderengines` contains the connected renderengines, they are prefixed by the typename of the renderengine
+- `dataclients`/`viewerclients` (optional) contains data or viewer clients respectively, following the same format as renderengines
 
 It provides an additional debug option: using the option `--oscdebug` followed by a string with ip and port (e.g. `--oscdebug "192.168.3.2:55112"`) an additional OSC-listener can be defined, which receives a copy of every OSC-message sent out by the OSC-router.
 
